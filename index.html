@@ -252,11 +252,11 @@
         .signature-container {
             font-family: 'Mona Sans', Arial, sans-serif;
             color: #333333;
-            /* Increased max-width significantly to give more room for content before scaling */
-            max-width: 600px; /* Increased from 600px to provide more horizontal space */
+            /* Reduced max-width and scale for overall smaller size */
+            max-width: 500px; /* Reduced from 600px */
             box-sizing: border-box;
             line-height: 1.4;
-            transform: scale(0.85);
+            transform: scale(0.75); /* Reduced from 0.85 */
             transform-origin: top left;
             /* Ensure it behaves like a block for layout, but content can flow */
             display: block;
@@ -294,9 +294,9 @@
             /* Removed align-items: flex-start from here */
         }
         /* Inline style for SVG margin-right in generated HTML */
-        .signature-contact-item svg {
+        .signature-contact-item img { /* Targeting images for icons */
             vertical-align: middle;
-            flex-shrink: 0;
+            margin-right: 8px; /* Consistent gap for all icons */
         }
         .signature-link-section {
             background-color: var(--color-link-section-bg);
@@ -315,7 +315,7 @@
             display: flex;
             align-items: center;
         }
-        .signature-link-section a svg {
+        .signature-link-section a img { /* Targeting images for social icons */
             margin-right: 6px;
             flex-shrink: 0;
         }
@@ -328,11 +328,10 @@
             display: inline-block;
             margin-left: 10px;
         }
-        .social-icons svg {
-            fill: var(--color-light-text);
-            flex-shrink: 0;
+        .social-icons img { /* Targeting images for social icons */
             width: 20px;
             height: 20px;
+            vertical-align: middle;
         }
 
         /* Responsive adjustments for Bento Grid */
@@ -427,7 +426,7 @@
 
     <header>
         <a href="#" class="logo-link">
-            <img src="https://www.radiantbd.com/logo.png" alt="RadiantBD Logo" class="logo-img">
+            <img src="https://www.radiantbd.com/images/rcl_logo.png" alt="RadiantBD Logo" class="logo-img">
         </a>
         <nav>
             <a href="#tool">Signature Tool</a>
@@ -523,7 +522,7 @@
         const closeMessageBox = document.getElementById('closeMessageBox');
 
         // URL for the company logo
-        const logoUrl = "https://www.radiantbd.com/logo.png";
+        const logoUrl = "https://www.radiantbd.com/images/rcl_logo.png"; // Updated logo URL
 
         // Fixed company information
         const fixedAddressPart1 = "Bashati Condominium, Suite# D:5-6";
@@ -545,18 +544,18 @@
             messageBox.classList.add('hidden');
         });
 
-        // SVG icons (inline for optimal email client compatibility)
-        // Added margin-right directly to SVG for better email client compatibility
-        const phoneIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
-        const mailIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`;
-        const mapPinIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
-        const linkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;" class="lucide lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07L9.4 6.54a5 5 0 0 0 7.07 7.07l1.41-1.41"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07L14.6 17.46a5 5 0 0 0-7.07-7.07l-1.41 1.41"/></svg>`;
+        // Icon Image URLs (using ik.imagekit.io as requested)
+        const phoneIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/phone.png" alt="Phone" width="14" height="14" style="vertical-align: middle; margin-right: 8px;">`;
+        const mailIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/mail.png" alt="Mail" width="14" height="14" style="vertical-align: middle; margin-right: 8px;">`;
+        const mapPinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/location.png" alt="Location" width="14" height="14" style="vertical-align: top; margin-right: 8px;">`; // Vertical-align top for address
+        const linkIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/link.png" alt="Website" width="14" height="14" style="vertical-align: middle; margin-right: 6px;">`;
 
-        // Social Media Icons (inline for email client compatibility) - Using paths from Simple Icons CDN
-        const facebookIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.028 1.791-4.697 4.533-4.697 1.313 0 2.686.234 2.686.234v2.953H15.83c-1.491 0-1.956.925-1.956 1.877v2.273h3.352l-.533 3.47h-2.819v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
-        const linkedinIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><path d="M20.447 20.452h-3.554v-5.569c0-1.32-.026-3.017-1.834-3.017-1.838 0-2.11 1.432-2.11 2.926v5.659h-3.554V9h3.414v1.561h.046c.477-.9 1.637-1.834 3.37-1.834 3.606 0 4.267 2.365 4.267 6.879v7.925zM4.337 6.77c-1.144 0-2.078-.934-2.078-2.078 0-1.144.934-2.078 2.078-2.078 1.144 0 2.078.934 2.078 2.078 0 1.144-.934 2.078-2.078 2.078zM5.901 20.452H2.347V9h3.554v11.452z"/></svg>`;
-        const youtubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><path d="M21.94 6.55c-.24-.9-.98-1.64-1.88-1.88C18.78 4.3 12 4.3 12 4.3s-6.78 0-8.06.37c-.9.24-1.64.98-1.88 1.88C2.3 8.22 2.3 12 2.3 12s0 3.78.37 5.06c.24.9.98 1.64 1.88 1.88C5.22 19.7 12 19.7 12 19.7s6.78 0 8.06-.37c.9-.24 1.64-.98 1.88-1.88.37-1.28.37-5.06.37-5.06s0-3.78-.37-5.06zM9.37 15.43V8.57L15.94 12l-6.57 3.43z"/></svg>`;
-        const instagramIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></svg>`;
+        // Social Media Icon Image URLs (using ik.imagekit.io as requested)
+        const facebookIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/fb.png" alt="Facebook" width="20" height="20" style="vertical-align: middle;">`;
+        const linkedinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/lin.png" alt="LinkedIn" width="20" height="20" style="vertical-align: middle;">`;
+        const youtubeIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/yt.png" alt="YouTube" width="20" height="20" style="vertical-align: middle;">`;
+        const instagramIconImg = `<img src="${fixedInstagram ? fixedInstagram : 'https://ik.imagekit.io/mwyisb0h4/instagram.png'}" alt="Instagram" width="20" height="20" style="vertical-align: middle;">`; // Placeholder for Instagram if no URL provided
+
 
         /**
          * Generates the HTML string for the email signature based on current input values.
@@ -577,11 +576,11 @@
             let phoneNumbersHtml = '';
             if (mobileNumber && sipNumber) {
                 // Use non-breaking spaces around the pipe for better rendering
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIcon}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a> <span style="padding: 0 2px;">|</span> <a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a> <span style="padding: 0 2px;">|</span> <a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
             } else if (mobileNumber) {
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIcon}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a></p>`;
             } else if (sipNumber) {
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIcon}<a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
             }
 
             // Dynamically generate title/department HTML
@@ -601,15 +600,10 @@
                 <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 0; font-size: 13px; line-height: 1.5; color: #4a5568; vertical-align: top; width: 22px;">
-                            ${mapPinIcon}
+                            ${mapPinIconImg}
                         </td>
                         <td style="padding: 0; font-size: 13px; line-height: 1.5; color: #4a5568; vertical-align: top; padding-left: 0;">
-                            <span style="display: inline-block; white-space: nowrap;">${fixedAddressPart1}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0; width: 22px;"></td> <!-- Spacer for icon alignment -->
-                        <td style="padding: 0; font-size: 13px; line-height: 1.5; color: #4a5568; vertical-align: top; padding-left: 0;">
+                            <span style="display: inline-block; white-space: nowrap;">${fixedAddressPart1}</span><br>
                             <span style="display: inline-block;">${fixedAddressPart2}</span>
                         </td>
                     </tr>
@@ -620,13 +614,13 @@
             // The main HTML structure for the email signature
             // Using a table for robust email client compatibility
             return `
-                <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px; border-collapse: collapse; font-family: 'Mona Sans', Arial, sans-serif; color: #333333; line-height: 1.4; transform: scale(0.85); transform-origin: top left;">
+                <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 500px; border-collapse: collapse; font-family: 'Mona Sans', Arial, sans-serif; color: #333333; line-height: 1.4; transform: scale(0.75); transform-origin: top left;">
                     <tr>
                         <td valign="top" style="padding-right: 15px; width: 65%;">
                             <p style="margin: 0; font-size: 20px; font-weight: bold; color: #1F3760; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fullName}</p>
                             ${titleDepartmentHtml}
                             ${phoneNumbersHtml}
-                            <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${mailIcon}<a href="mailto:${email}" style="color: #4a5568; text-decoration: none;">${email}</a></p>
+                            <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${mailIconImg}<a href="mailto:${email}" style="color: #4a5568; text-decoration: none;">${email}</a></p>
                             ${addressHtml}
                         </td>
                         <td valign="middle" style="width: 35%; text-align: right; padding-right: 0px;">
@@ -634,14 +628,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="padding-top: 20px;"> <!-- Increased padding-top here for space -->
+                        <td colspan="2" style="padding-top: 15px;"> <!-- Increased padding-top here for space -->
                             <div style="background-color: #2a3b7d; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;">
-                                ${fixedWebsite ? `<a href="${fixedWebsite}" target="_blank" style="color: white; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center;">${linkIcon} ${fixedWebsite.replace(/^https?:\/\//, '')}</a>` : '<span></span>'}
+                                ${fixedWebsite ? `<a href="${fixedWebsite}" target="_blank" style="color: white; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center;">${linkIconImg} ${fixedWebsite.replace(/^https?:\/\//, '')}</a>` : '<span></span>'}
                                 <div style="display: flex; align-items: center; flex-wrap: nowrap;">
-                                    ${fixedFacebook ? `<a href="${fixedFacebook}" target="_blank" style="display: inline-block; margin-left: 10px;">${facebookIcon}</a>` : ''}
-                                    ${fixedLinkedin ? `<a href="${fixedLinkedin}" target="_blank" style="display: inline-block; margin-left: 10px;">${linkedinIcon}</a>` : ''}
-                                    ${fixedYoutube ? `<a href="${fixedYoutube}" target="_blank" style="display: inline-block; margin-left: 10px;">${youtubeIcon}</a>` : ''}
-                                    ${fixedInstagram ? `<a href="${fixedInstagram}" target="_blank" style="display: inline-block; margin-left: 10px;">${instagramIcon}</a>` : ''}
+                                    ${fixedFacebook ? `<a href="${fixedFacebook}" target="_blank" style="display: inline-block; margin-left: 10px;">${facebookIconImg}</a>` : ''}
+                                    ${fixedLinkedin ? `<a href="${fixedLinkedin}" target="_blank" style="display: inline-block; margin-left: 10px;">${linkedinIconImg}</a>` : ''}
+                                    ${fixedYoutube ? `<a href="${fixedYoutube}" target="_blank" style="display: inline-block; margin-left: 10px;">${youtubeIconImg}</a>` : ''}
+                                    ${fixedInstagram ? `<a href="${fixedInstagram}" target="_blank" style="display: inline-block; margin-left: 10px;">${instagramIconImg}</a>` : ''}
                                 </div>
                             </div>
                         </td>
@@ -720,10 +714,10 @@
                         .signature-container {
                             font-family: 'Mona Sans', Arial, sans-serif;
                             color: #333333;
-                            max-width: 600px; /* Increased max-width to provide more room before scaling */
+                            max-width: 500px; /* Reduced from 600px */
                             box-sizing: border-box;
                             line-height: 1.4;
-                            transform: scale(0.85);
+                            transform: scale(0.75); /* Reduced from 0.85 */
                             transform-origin: top left;
                             /* Ensure it behaves like a block for layout, but content can flow */
                             display: block;
@@ -761,9 +755,9 @@
                             /* Removed align-items: flex-start from here */
                         }
                         /* Inline style for SVG margin-right in generated HTML */
-                        .signature-contact-item svg {
+                        .signature-contact-item img { /* Targeting images for icons */
                             vertical-align: middle;
-                            flex-shrink: 0;
+                            margin-right: 8px; /* Consistent gap for all icons */
                         }
                         .signature-link-section {
                             background-color: #2a3b7d;
@@ -782,7 +776,7 @@
                             display: flex;
                             align-items: center;
                         }
-                        .signature-link-section a svg {
+                        .signature-link-section a img { /* Targeting images for social icons */
                             margin-right: 6px;
                             flex-shrink: 0;
                         }
@@ -795,11 +789,10 @@
                             display: inline-block;
                             margin-left: 10px;
                         }
-                        .social-icons svg {
-                            fill: white;
-                            flex-shrink: 0;
+                        .social-icons img { /* Targeting images for social icons */
                             width: 20px;
                             height: 20px;
+                            vertical-align: middle;
                         }
                     </style>
                 </head>
@@ -866,8 +859,8 @@
                     showMessageBox('Failed to copy HTML. Please try again.');
                 }
             } catch (err) {
-                console.error('Failed to copy HTML: ', err);
-                showMessageBox('Failed to copy HTML. Your browser might not support this feature.');
+                    console.error('Failed to copy HTML: ', err);
+                    showMessageBox('Failed to copy HTML. Your browser might not support this feature. Please try manually selecting the preview content.');
             } finally {
                 document.body.removeChild(tempTextArea); // Clean up the temporary textarea
             }
