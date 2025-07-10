@@ -249,88 +249,79 @@
         }
 
         /* Signature styles - these will be injected into the iframe and used for HTML copy */
+        /* IMPORTANT: These styles are critical for email client compatibility */
         .signature-container {
             font-family: 'Mona Sans', Arial, sans-serif;
             color: #333333;
-            /* Reduced max-width and scale for overall smaller size */
-            max-width: 500px; /* Reduced from 600px */
+            max-width: 320px; /* Adjusted to a common email signature width for compact size */
+            width: 100%; /* Ensure it takes available width within the table */
             box-sizing: border-box;
             line-height: 1.4;
-            transform: scale(0.75); /* Reduced from 0.85 */
-            transform-origin: top left;
-            /* Ensure it behaves like a block for layout, but content can flow */
-            display: block;
-            white-space: normal; /* Allow text wrapping within the container */
+            /* Removed transform: scale() for email client compatibility */
+            border-collapse: collapse; /* Ensure table borders collapse */
         }
         .signature-name {
-            font-size: 20px; /* Increased by 2px from 18px */
+            font-size: 13px; /* Increased font size for name */
             font-weight: bold;
-            color: var(--color-signature-name);
+            color: #1F3760;
             margin-bottom: 2px;
-            white-space: nowrap; /* Keep name on one line */
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .signature-title-department {
-            font-size: 14px;
+            font-size: 11px; /* Adjusted to match email font size */
             font-weight: 500;
-            color: var(--color-signature-title-department);
-            margin-bottom: 15px;
-            white-space: nowrap; /* Keep title/department on one line */
+            color: #1a1a1a;
+            margin-bottom: 8px; /* Adjusted margin */
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             display: block;
         }
-        /* Adjusted for email client compatibility */
         .signature-contact-item {
-            font-size: 13px;
+            font-size: 10px; /* Decreased font size for mobile, SIP, email, address */
             color: #4a5568;
             line-height: 1.5;
-            margin-bottom: 4px;
-            /* Removed display: flex and align-items: center from here */
-            white-space: nowrap; /* Keep contact items on one line if possible */
+            margin-bottom: 2px; /* Adjusted margin */
+            white-space: nowrap; /* Keep contact items on one line */
         }
-        .signature-contact-item.address-item {
-            /* Removed align-items: flex-start from here */
-        }
-        /* Inline style for SVG margin-right in generated HTML */
         .signature-contact-item img { /* Targeting images for icons */
             vertical-align: middle;
-            margin-right: 8px; /* Consistent gap for all icons */
+            margin-right: 5px; /* Consistent gap for all icons */
+            width: 12px; /* Adjusted icon size */
+            height: 12px; /* Adjusted icon size */
         }
         .signature-link-section {
-            background-color: var(--color-link-section-bg);
-            padding: 10px 15px;
-            border-radius: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
+            background-color: #2a3b7d;
+            padding: 6px 8px; /* Adjusted padding */
+            /* Removed border-radius as it's often ignored */
+            /* Using table for layout instead of flex */
+            margin-top: 8px; /* Adjusted margin */
         }
         .signature-link-section a {
-            color: var(--color-light-text);
+            color: white;
             text-decoration: none;
-            font-size: 15px; /* Increased by 1px from 14px */
+            font-size: 10px; /* Decreased font size for website */
             font-weight: 500;
-            display: flex;
-            align-items: center;
+            /* Removed display: flex and align-items: center from here */
         }
         .signature-link-section a img { /* Targeting images for social icons */
-            margin-right: 6px;
-            flex-shrink: 0;
+            margin-right: 3px; /* Adjusted margin */
+            width: 16px; /* Adjusted icon size */
+            height: 16px; /* Adjusted icon size */
+            vertical-align: middle;
         }
         .social-icons {
-            display: flex;
-            align-items: center;
-            flex-wrap: nowrap;
+            /* Handled by table cells in generated HTML */
         }
         .social-icons a {
             display: inline-block;
-            margin-left: 10px;
+            margin-left: 6px; /* Adjusted margin */
         }
-        .social-icons img { /* Targeting images for social icons */
-            width: 20px;
-            height: 20px;
+        .social-icons img {
+            width: 16px; /* Adjusted icon size */
+            height: 16px; /* Adjusted icon size */
             vertical-align: middle;
         }
 
@@ -526,7 +517,8 @@
 
         // Fixed company information
         const fixedAddressPart1 = "Bashati Condominium, Suite# D:5-6";
-        const fixedAddressPart2 = "House# 15, Road# 17, Banani C/A, Dhaka-1213";
+        const fixedAddressPart2_line1 = "House# 15, Road# 17, Banani C/A"; // Split for line break
+        const fixedAddressPart2_line2 = "Dhaka-1213"; // Split for line break
         const fixedWebsite = "https://www.radiantbd.com";
         const fixedFacebook = "https://www.facebook.com/RADIANTISP";
         const fixedLinkedin = "https://www.linkedin.com/company/radiant-communications-ltd./?originalSubdomain=bd";
@@ -545,17 +537,40 @@
         });
 
         // Icon Image URLs (using ik.imagekit.io as requested)
-        const phoneIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/phone.png" alt="Phone" width="14" height="14" style="vertical-align: middle; margin-right: 8px;">`;
-        const mailIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/mail.png" alt="Mail" width="14" height="14" style="vertical-align: middle; margin-right: 8px;">`;
-        const mapPinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/location.png" alt="Location" width="14" height="14" style="vertical-align: top; margin-right: 8px;">`; // Vertical-align top for address
-        const linkIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/link.png" alt="Website" width="14" height="14" style="vertical-align: middle; margin-right: 6px;">`;
+        // Note: These are placeholder URLs. For production, ensure your images are publicly accessible and stable.
+        const phoneIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/phone.png" alt="Phone" width="10" height="10" style="vertical-align: middle; margin-right: 5px;">`; // Decreased size
+        const mailIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/mail.png" alt="Mail" width="10" height="10" style="vertical-align: middle; margin-right: 5px;">`; // Decreased size
+        const mapPinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/location.png" alt="Location" width="10" height="10" style="vertical-align: top; margin-right: 5px;">`; // Decreased size
+        const linkIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/link.png" alt="Website" width="10" height="10" style="vertical-align: middle; margin-right: 4px;">`; // Decreased size
 
         // Social Media Icon Image URLs (using ik.imagekit.io as requested)
-        const facebookIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/fb.png" alt="Facebook" width="20" height="20" style="vertical-align: middle;">`;
-        const linkedinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/lin.png" alt="LinkedIn" width="20" height="20" style="vertical-align: middle;">`;
-        const youtubeIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/yt.png" alt="YouTube" width="20" height="20" style="vertical-align: middle;">`;
-        const instagramIconImg = `<img src="${fixedInstagram ? fixedInstagram : 'https://ik.imagekit.io/mwyisb0h4/instagram.png'}" alt="Instagram" width="20" height="20" style="vertical-align: middle;">`; // Placeholder for Instagram if no URL provided
+        const facebookIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/fb.png" alt="Facebook" width="14" height="14" style="vertical-align: middle;">`; // Decreased size
+        const linkedinIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/lin.png" alt="LinkedIn" width="14" height="14" style="vertical-align: middle;">`; // Decreased size
+        const youtubeIconImg = `<img src="https://ik.imagekit.io/mwyisb0h4/yt.png" alt="YouTube" width="14" height="14" style="vertical-align: middle;">`; // Decreased size
+        const instagramIconImg = `<img src="${fixedInstagram ? fixedInstagram : 'https://ik.imagekit.io/mwyisb0h4/instagram.png'}" alt="Instagram" width="14" height="14" style="vertical-align: middle;">`; // Decreased size
 
+
+        /**
+         * Converts a string to Title Case (first letter of each word capitalized).
+         * @param {string} str - The input string.
+         * @returns {string} The string in Title Case.
+         */
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+        /**
+         * Validates an email address against a list of allowed domains.
+         * @param {string} email - The email address to validate.
+         * @returns {boolean} True if the email is valid, false otherwise.
+         */
+        function isValidEmailDomain(email) {
+            const allowedDomains = ['gmail.com', 'yahoo.com', 'radiantbd.com', 'hotmail.com'];
+            const domain = email.split('@')[1];
+            return allowedDomains.includes(domain);
+        }
 
         /**
          * Generates the HTML string for the email signature based on current input values.
@@ -564,80 +579,87 @@
          */
         function generateSignatureHtml() {
             // Get values from input fields.
-            // Convert full name to uppercase for the signature preview
-            const fullName = fullNameInput.value.toUpperCase();
-            const title = titleInput.value;
-            const department = departmentInput.value;
-            const email = emailInput.value;
+            // Apply Title Case for name, title, and department
+            const fullName = toTitleCase(fullNameInput.value);
+            const title = toTitleCase(titleInput.value);
+            const department = toTitleCase(departmentInput.value);
+            // Email will be lowercase
+            const email = emailInput.value.toLowerCase();
             const mobileNumber = mobileNumberInput.value;
             const sipNumber = sipNumberInput.value;
 
             // Dynamically generate phone numbers HTML based on input
             let phoneNumbersHtml = '';
             if (mobileNumber && sipNumber) {
-                // Use non-breaking spaces around the pipe for better rendering
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a> <span style="padding: 0 2px;">|</span> <a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 10px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a> <span style="padding: 0 2px;">|</span> <a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
             } else if (mobileNumber) {
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 10px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${mobileNumber}" style="color: #4a5568; text-decoration: none;">${mobileNumber}</a></p>`;
             } else if (sipNumber) {
-                phoneNumbersHtml = `<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
+                phoneNumbersHtml = `<p style="margin: 0; font-size: 10px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${phoneIconImg}<a href="tel:${sipNumber}" style="color: #4a5568; text-decoration: none;">${sipNumber}</a></p>`;
             }
 
             // Dynamically generate title/department HTML
             let titleDepartmentHtml = '';
             if (title && department) {
-                titleDepartmentHtml = `<p style="margin: 0; font-size: 14px; color: #1a1a1a; font-weight: 500; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${title} <span style="padding: 0 2px;">|</span> ${department}</p>`;
+                titleDepartmentHtml = `<p style="margin: 0; font-size: 11px; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${title} <span style="padding: 0 2px;">|</span> ${department}</p>`;
             } else if (title) {
-                titleDepartmentHtml = `<p style="margin: 0; font-size: 14px; color: #1a1a1a; font-weight: 500; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${title}</p>`;
+                titleDepartmentHtml = `<p style="margin: 0; font-size: 11px; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${title}</p>`;
             } else if (department) {
-                titleDepartmentHtml = `<p style="margin: 0; font-size: 14px; color: #1a1a1a; font-weight: 500; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${department}</p>`;
+                titleDepartmentHtml = `<p style="margin: 0; font-size: 11px; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${department}</p>`;
             } else {
-                titleDepartmentHtml = `<p style="margin: 0; margin-bottom: 15px; display: block;"></p>`; // Empty paragraph for consistent spacing
+                titleDepartmentHtml = `<p style="margin: 0; margin-bottom: 10px; display: block;"></p>`; // Empty paragraph for consistent spacing
             }
 
             // Using a table for address lines to ensure consistent alignment in email clients
+            // fixedAddressPart2_line1 and fixedAddressPart2_line2 are used here
             const addressHtml = `
                 <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                     <tr>
-                        <td style="padding: 0; font-size: 13px; line-height: 1.5; color: #4a5568; vertical-align: top; width: 22px;">
+                        <td style="padding: 0; font-size: 10px; line-height: 1.5; color: #4a5568; vertical-align: top; width: 17px;">
                             ${mapPinIconImg}
                         </td>
-                        <td style="padding: 0; font-size: 13px; line-height: 1.5; color: #4a5568; vertical-align: top; padding-left: 0;">
+                        <td style="padding: 0; font-size: 10px; line-height: 1.5; color: #4a5568; vertical-align: top; padding-left: 0;">
                             <span style="display: inline-block; white-space: nowrap;">${fixedAddressPart1}</span><br>
-                            <span style="display: inline-block;">${fixedAddressPart2}</span>
+                            <span style="display: inline-block;">${fixedAddressPart2_line1}</span><br>
+                            <span style="display: inline-block;">${fixedAddressPart2_line2}</span>
                         </td>
                     </tr>
                 </table>
             `;
 
-
             // The main HTML structure for the email signature
             // Using a table for robust email client compatibility
             return `
-                <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 500px; border-collapse: collapse; font-family: 'Mona Sans', Arial, sans-serif; color: #333333; line-height: 1.4; transform: scale(0.75); transform-origin: top left;">
+                <table cellpadding="0" cellspacing="0" border="0" style="width: 320px; border-collapse: collapse; font-family: 'Mona Sans', Arial, sans-serif; color: #333333; line-height: 1.4;">
                     <tr>
-                        <td valign="top" style="padding-right: 15px; width: 65%;">
-                            <p style="margin: 0; font-size: 20px; font-weight: bold; color: #1F3760; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fullName}</p>
+                        <td valign="top" style="padding-right: 10px; width: 65%;">
+                            <p style="margin: 0; font-size: 13px; font-weight: bold; color: #1F3760; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${fullName}</p>
                             ${titleDepartmentHtml}
                             ${phoneNumbersHtml}
-                            <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${mailIconImg}<a href="mailto:${email}" style="color: #4a5568; text-decoration: none;">${email}</a></p>
+                            <p style="margin: 0; font-size: 10px; line-height: 1.5; color: #4a5568; margin-bottom: 4px; white-space: nowrap;">${mailIconImg}<a href="mailto:${email}" style="color: #4a5568; text-decoration: none;">${email}</a></p>
                             ${addressHtml}
                         </td>
                         <td valign="middle" style="width: 35%; text-align: right; padding-right: 0px;">
-                            <img src="${logoUrl}" alt="Company Logo" style="max-width: 220px; height: auto; display: block; border: 0; margin-left: auto; margin-right: 0;">
+                            <img src="${logoUrl}" alt="Company Logo" style="max-width: 150px; height: auto; display: block; border: 0; margin-left: auto; margin-right: 0;">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="padding-top: 15px;"> <!-- Increased padding-top here for space -->
-                            <div style="background-color: #2a3b7d; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;">
-                                ${fixedWebsite ? `<a href="${fixedWebsite}" target="_blank" style="color: white; text-decoration: none; font-size: 15px; font-weight: 500; display: flex; align-items: center;">${linkIconImg} ${fixedWebsite.replace(/^https?:\/\//, '')}</a>` : '<span></span>'}
-                                <div style="display: flex; align-items: center; flex-wrap: nowrap;">
-                                    ${fixedFacebook ? `<a href="${fixedFacebook}" target="_blank" style="display: inline-block; margin-left: 10px;">${facebookIconImg}</a>` : ''}
-                                    ${fixedLinkedin ? `<a href="${fixedLinkedin}" target="_blank" style="display: inline-block; margin-left: 10px;">${linkedinIconImg}</a>` : ''}
-                                    ${fixedYoutube ? `<a href="${fixedYoutube}" target="_blank" style="display: inline-block; margin-left: 10px;">${youtubeIconImg}</a>` : ''}
-                                    ${fixedInstagram ? `<a href="${fixedInstagram}" target="_blank" style="display: inline-block; margin-left: 10px;">${instagramIconImg}</a>` : ''}
-                                </div>
-                            </div>
+                        <td colspan="2" style="padding-top: 10px;"> <!-- Adjusted padding-top for space -->
+                            <table cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse; background-color: #2a3b7d;">
+                                <tr>
+                                    <td style="padding: 6px 10px; vertical-align: middle;">
+                                        ${fixedWebsite ? `<a href="${fixedWebsite}" target="_blank" style="color: white; text-decoration: none; font-size: 10px; font-weight: 500; display: inline-block; vertical-align: middle;">${linkIconImg} ${fixedWebsite.replace(/^https?:\/\//, '')}</a>` : '<span></span>'}
+                                    </td>
+                                    <td style="padding: 6px 10px; text-align: right; vertical-align: middle;">
+                                        <div style="display: inline-block; white-space: nowrap;">
+                                            ${fixedFacebook ? `<a href="${fixedFacebook}" target="_blank" style="display: inline-block; margin-left: 6px;"><img src="https://ik.imagekit.io/mwyisb0h4/fb.png" alt="Facebook" width="14" height="14" style="vertical-align: middle;"></a>` : ''}
+                                            ${fixedLinkedin ? `<a href="${fixedLinkedin}" target="_blank" style="display: inline-block; margin-left: 6px;"><img src="https://ik.imagekit.io/mwyisb0h4/lin.png" alt="LinkedIn" width="14" height="14" style="vertical-align: middle;"></a>` : ''}
+                                            ${fixedYoutube ? `<a href="${fixedYoutube}" target="_blank" style="display: inline-block; margin-left: 6px;"><img src="https://ik.imagekit.io/mwyisb0h4/yt.png" alt="YouTube" width="14" height="14" style="vertical-align: middle;"></a>` : ''}
+                                            ${fixedInstagram ? `<a href="${fixedInstagram}" target="_blank" style="display: inline-block; margin-left: 6px;"><img src="https://ik.imagekit.io/mwyisb0h4/instagram.png" alt="Instagram" width="14" height="14" style="vertical-align: middle;"></a>` : ''}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -699,121 +721,134 @@
          * It also manages the visibility of the signature preview container.
          */
         function updateSignaturePreview() {
-            const signatureHtml = generateSignatureHtml();
-            const iframeDoc = signatureFrame.contentDocument || signatureFrame.contentWindow.document;
-            iframeDoc.open();
-            // Write the full HTML document into the iframe, including necessary styles
-            iframeDoc.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        body { margin: 0; padding: 0; overflow: hidden; }
-                        /* Ensure styles are also present in the iframe for accurate preview */
-                        /* Signature styles - these will be injected into the iframe and used for HTML copy */
-                        .signature-container {
-                            font-family: 'Mona Sans', Arial, sans-serif;
-                            color: #333333;
-                            max-width: 500px; /* Reduced from 600px */
-                            box-sizing: border-box;
-                            line-height: 1.4;
-                            transform: scale(0.75); /* Reduced from 0.85 */
-                            transform-origin: top left;
-                            /* Ensure it behaves like a block for layout, but content can flow */
-                            display: block;
-                            white-space: normal; /* Allow text wrapping within the container */
-                        }
-                        .signature-name {
-                            font-size: 20px; /* Increased by 2px from 18px */
-                            font-weight: bold;
-                            color: #1F3760;
-                            margin-bottom: 2px;
-                            white-space: nowrap; /* Keep name on one line */
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                        .signature-title-department {
-                            font-size: 14px;
-                            font-weight: 500;
-                            color: #1a1a1a;
-                            margin-bottom: 15px;
-                            white-space: nowrap; /* Keep title/department on one line */
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            display: block;
-                        }
-                        /* Adjusted for email client compatibility */
-                        .signature-contact-item {
-                            font-size: 13px;
-                            color: #4a5568;
-                            line-height: 1.5;
-                            margin-bottom: 4px;
-                            /* Removed display: flex and align-items: center from here */
-                            white-space: nowrap; /* Keep contact items on one line if possible */
-                        }
-                        .signature-contact-item.address-item {
-                            /* Removed align-items: flex-start from here */
-                        }
-                        /* Inline style for SVG margin-right in generated HTML */
-                        .signature-contact-item img { /* Targeting images for icons */
-                            vertical-align: middle;
-                            margin-right: 8px; /* Consistent gap for all icons */
-                        }
-                        .signature-link-section {
-                            background-color: #2a3b7d;
-                            padding: 10px 15px;
-                            border-radius: 0;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            margin-top: 15px;
-                        }
-                        .signature-link-section a {
-                            color: white;
-                            text-decoration: none;
-                            font-size: 15px; /* Increased by 1px from 14px */
-                            font-weight: 500;
-                            display: flex;
-                            align-items: center;
-                        }
-                        .signature-link-section a img { /* Targeting images for social icons */
-                            margin-right: 6px;
-                            flex-shrink: 0;
-                        }
-                        .social-icons {
-                            display: flex;
-                            align-items: center;
-                            flex-wrap: nowrap;
-                        }
-                        .social-icons a {
-                            display: inline-block;
-                            margin-left: 10px;
-                        }
-                        .social-icons img { /* Targeting images for social icons */
-                            width: 20px;
-                            height: 20px;
-                            vertical-align: middle;
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${signatureHtml}
-                </body>
-                </html>
-            `);
-            iframeDoc.close();
+            // Apply Title Case to relevant inputs on input event
+            // This is handled by the input event listeners directly on the fields
+            
+            // Apply Lowercase to email input on input event
+            // This is handled by the input event listener directly on the email field
 
-            // Adjust iframe height to fit its content dynamically
-            // Set a timeout to ensure content is rendered before calculating scrollHeight
-            setTimeout(() => {
-                const contentHeight = iframeDoc.body.scrollHeight;
-                if (contentHeight > 0) {
-                    signatureFrame.style.height = contentHeight + 'px';
-                } else {
-                    // Fallback or minimum height if contentHeight is 0 (e.g., when empty)
-                    signatureFrame.style.height = '100px'; // A default height
-                }
-            }, 0);
+            // Validate email before generating signature
+            let isEmailValid = true;
+            // Only validate on blur or if the field is not empty
+            if (event && event.type === 'blur' && emailInput.value.trim() !== '' && !isValidEmailDomain(emailInput.value)) {
+                showMessageBox('Please enter a valid email address with a supported domain (@gmail.com, @yahoo.com, @radiantbd.com, @hotmail.com).');
+                isEmailValid = false;
+            } else if (event && event.type === 'blur' && emailInput.value.trim() === '') {
+                 // If email field is empty on blur, ensure it's considered valid for preview purposes
+                 isEmailValid = true;
+            } else if (event && event.type === 'input') {
+                // On input, allow preview to update, but if it's invalid, the blur will catch it
+                isEmailValid = true; // Temporarily allow update on input, blur will re-validate
+            }
+
+
+            // Only update preview if email is valid or empty
+            if (isEmailValid) {
+                const signatureHtml = generateSignatureHtml();
+                const iframeDoc = signatureFrame.contentDocument || signatureFrame.contentWindow.document;
+                iframeDoc.open();
+                // Write the full HTML document into the iframe, including necessary styles
+                iframeDoc.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            body { margin: 0; padding: 0; overflow: hidden; }
+                            /* Ensure styles are also present in the iframe for accurate preview */
+                            /* Signature styles - these will be injected into the iframe and used for HTML copy */
+                            .signature-container {
+                                font-family: 'Mona Sans', Arial, sans-serif;
+                                color: #333333;
+                                max-width: 320px; /* Adjusted to a common email signature width */
+                                width: 100%; /* Ensure it takes available width within the table */
+                                box-sizing: border-box;
+                                line-height: 1.4;
+                                /* Removed transform: scale() for email client compatibility */
+                                border-collapse: collapse; /* Ensure table borders collapse */
+                            }
+                            .signature-name {
+                                font-size: 13px; /* Increased font size for name */
+                                font-weight: bold;
+                                color: #1F3760;
+                                margin-bottom: 2px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                            .signature-title-department {
+                                font-size: 11px; /* Adjusted to match email font size */
+                                font-weight: 500;
+                                color: #1a1a1a;
+                                margin-bottom: 8px; /* Adjusted margin */
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: block;
+                            }
+                            .signature-contact-item {
+                                font-size: 10px; /* Decreased font size for mobile, SIP, email, address */
+                                color: #4a5568;
+                                line-height: 1.5;
+                                margin-bottom: 2px; /* Adjusted margin */
+                                white-space: nowrap; /* Keep contact items on one line */
+                            }
+                            .signature-contact-item img { /* Targeting images for icons */
+                                vertical-align: middle;
+                                margin-right: 5px; /* Consistent gap for all icons */
+                                width: 12px; /* Adjusted icon size */
+                                height: 12px; /* Adjusted icon size */
+                            }
+                            .signature-link-section {
+                                background-color: #2a3b7d;
+                                padding: 6px 8px; /* Adjusted padding */
+                                /* Removed border-radius as it's often ignored */
+                                /* Using table for layout instead of flex */
+                                margin-top: 8px; /* Adjusted margin */
+                            }
+                            .signature-link-section a {
+                                color: white;
+                                text-decoration: none;
+                                font-size: 10px; /* Decreased font size for website */
+                                font-weight: 500;
+                                /* Removed display: flex and align-items: center from here */
+                            }
+                            .signature-link-section a img { /* Targeting images for social icons */
+                                margin-right: 3px; /* Adjusted margin */
+                                width: 16px; /* Adjusted icon size */
+                                height: 16px; /* Adjusted icon size */
+                                vertical-align: middle;
+                            }
+                            .social-icons {
+                                /* Handled by table cells in generated HTML */
+                            }
+                            .social-icons a {
+                                display: inline-block;
+                                margin-left: 6px; /* Adjusted margin */
+                            }
+                            .social-icons img {
+                                width: 16px; /* Adjusted icon size */
+                                height: 16px; /* Adjusted icon size */
+                                vertical-align: middle;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${signatureHtml}
+                    </body>
+                    </html>
+                `);
+                iframeDoc.close();
+
+                // Adjust iframe height to fit its content dynamically
+                setTimeout(() => {
+                    const contentHeight = iframeDoc.body.scrollHeight;
+                    if (contentHeight > 0) {
+                        signatureFrame.style.height = contentHeight + 'px';
+                    } else {
+                        signatureFrame.style.height = '100px'; // A default height
+                    }
+                }, 0);
+            }
 
 
             // Check if any input field has a value to determine preview visibility
@@ -831,17 +866,20 @@
         setupPhoneNumberInput(mobileNumberInput);
         setupPhoneNumberInput(sipNumberInput);
 
-        // Initial update of the signature preview when the page loads
-        // This will now hide the preview by default as all inputs are empty
-        document.addEventListener('DOMContentLoaded', updateSignaturePreview);
-
-        // Add event listeners to input fields for real-time signature updates
+        // Event listeners for input transformations and validation
         fullNameInput.addEventListener('input', updateSignaturePreview);
         titleInput.addEventListener('input', updateSignaturePreview);
         departmentInput.addEventListener('input', updateSignaturePreview);
+        
+        // Email input specific listeners for lowercase and blur validation
         emailInput.addEventListener('input', updateSignaturePreview);
+        emailInput.addEventListener('blur', updateSignaturePreview); 
+
         mobileNumberInput.addEventListener('input', updateSignaturePreview);
         sipNumberInput.addEventListener('input', updateSignaturePreview);
+
+        // Initial update of the signature preview when the page loads
+        document.addEventListener('DOMContentLoaded', updateSignaturePreview);
 
         // Event listener for "Copy HTML" button
         copyHtmlBtn.addEventListener('click', () => {
